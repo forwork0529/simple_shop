@@ -3,7 +3,6 @@ package bot_server
 import (
 	"fmt"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"log"
 	"os"
 	"sellerBot/internal/logger"
 	"sellerBot/internal/models"
@@ -68,6 +67,6 @@ func simpleAnswerPhoto(bot *tgbotapi.BotAPI, update tgbotapi.Update, photoPath s
 	msgPic := tgbotapi.NewPhoto(update.Message.Chat.ID, tgbotapi.FilePath(photoPath))
 	_, err := bot.Send(msgPic)
 	if err != nil {
-		log.Printf("cant send image: %v\n", err.Error())
+		logger.Errorf("cant send image: %v\n", err.Error())
 	}
 }
