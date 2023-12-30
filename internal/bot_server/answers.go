@@ -22,7 +22,7 @@ func informativeAnswerLink(bot *tgbotapi.BotAPI, update tgbotapi.Update, newMsgT
 	for _, productName := range fileNames {
 
 		simpleAnswerText(bot, update, TrimSuffix(productName))
-		readedBytes, err := os.ReadFile(path + `\` + productName)
+		readedBytes, err := os.ReadFile(path + `/` + productName)
 		if err != nil {
 			logger.Errorf("os.ReadFile(%v%v): %v", path, productName, err)
 			continue
