@@ -7,7 +7,7 @@ var (
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Платья"),
 			tgbotapi.NewKeyboardButton("Костюмы"),
-			tgbotapi.NewKeyboardButton("Халаты"),
+			tgbotapi.NewKeyboardButton("Свитеры"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Кимоно"),

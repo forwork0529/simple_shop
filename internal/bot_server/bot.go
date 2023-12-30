@@ -80,7 +80,7 @@ func (b *Bot) processUpdate(update tgbotapi.Update) {
 			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 		}
 		// Вывод клавиатуры на короткое сообщение или старт
-		if len(update.Message.Text) < 3 || update.Message.Text == "/start" {
+		if len(update.Message.Text) < 1 || update.Message.Text == "/start" {
 			simpleAnswerTextWithKeyBoard(b.BotAPI, update, fmt.Sprintf("Здравствуйте %v, надеемся Вам у нас понравится)", update.Message.From.UserName))
 			return
 		}
@@ -88,17 +88,17 @@ func (b *Bot) processUpdate(update tgbotapi.Update) {
 		switch update.Message.Text {
 
 		case "Платья":
-			informativeAnswerPhoto(b.BotAPI, update, "Вот изделия из категории \"Платья\":", config.Values.YandexPath+`/dresses`)
+			informativeAnswerLink(b.BotAPI, update, "Вот изделия из категории \"Платья\":", config.Values.YandexPath+`/dresses`)
 		case "Костюмы":
-			informativeAnswerPhoto(b.BotAPI, update, "Вот изделия из категории \"Костюмы\":", config.Values.YandexPath+`/suits`)
-		case "Халаты":
-			informativeAnswerPhoto(b.BotAPI, update, "Вот изделия из категории \"Халаты\":", config.Values.YandexPath+`/bathrobe`)
+			informativeAnswerLink(b.BotAPI, update, "Вот изделия из категории \"Костюмы\":", config.Values.YandexPath+`/suits`)
+		case "Свитеры":
+			informativeAnswerLink(b.BotAPI, update, "Вот изделия из категории \"свитеры\":", config.Values.YandexPath+`/sweaters`)
 		case "Кимоно":
-			informativeAnswerPhoto(b.BotAPI, update, "Вот изделия из категории \"Кимоно\":", config.Values.YandexPath+`/kimono`)
+			informativeAnswerLink(b.BotAPI, update, "Вот изделия из категории \"Кимоно\":", config.Values.YandexPath+`/kimono`)
 		case "Аксессуары":
 			informativeAnswerLink(b.BotAPI, update, "Вот изделия из категории \"Аксессуары\":", config.Values.YandexPath+`/accessories`)
 		case "Новинки":
-			informativeAnswerPhoto(b.BotAPI, update, "Вот изделия из категории \"Новинки\":", config.Values.YandexPath+`/news`)
+			informativeAnswerLink(b.BotAPI, update, "Вот изделия из категории \"Новинки\":", config.Values.YandexPath+`/news`)
 		default:
 			simpleAnswerTextWithKeyBoard(b.BotAPI, update, fmt.Sprintf("В каталоге нет такой категории: %v", update.Message.Text))
 
