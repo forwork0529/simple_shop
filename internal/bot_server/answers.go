@@ -8,26 +8,30 @@ import (
 	"sellerBot/internal/models"
 )
 
-func informativeAnswerLink(bot *tgbotapi.BotAPI, update tgbotapi.Update, newMsgText, path string) {
+func informativeAnswerLink(bot *tgbotapi.BotAPI, update tgbotapi.Update, newMsgText, path, folder string) {
 
 	simpleAnswerText(bot, update, newMsgText)
 
-	fileNames, noFiles := returnFilesInPath(path)
+	fileNames, noFiles := returnFilesInPath(path + `/` + folder)
 
 	if noFiles {
 		simpleAnswerPhoto(bot, update, `./packages/photos/hangres/hangres.jpg`)
 		simpleAnswerText(bot, update, "Ассортимент пополняется)..")
 	}
 
+	shopIdx := retIndexSymbol(folder)
+	var countIdx = 1
+
 	for _, productName := range fileNames {
 
-		simpleAnswerText(bot, update, TrimSuffix(productName))
-		readedBytes, err := os.ReadFile(path + `/` + productName)
+		simpleAnswerText(bot, update, TrimSuffix(fmt.Sprintf("Изделие #%s%v", shopIdx, countIdx)))
+		readedBytes, err := os.ReadFile(path + folder + `/` + productName)
 		if err != nil {
-			logger.Errorf("os.ReadFile(%v%v): %v", path, productName, err)
+			logger.Errorf("os.ReadFile(%v/%v): %v", path, productName, err)
 			continue
 		}
 		simpleAnswerText(bot, update, string(readedBytes))
+		countIdx += 1
 	}
 }
 

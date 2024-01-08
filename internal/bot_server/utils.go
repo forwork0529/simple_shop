@@ -29,3 +29,21 @@ func TrimSuffix(toPrintProductName string) string {
 	}
 	return toPrintProductName
 }
+
+func retIndexSymbol(folderName string) string {
+	switch folderName {
+	case `/dresses`:
+		return "П"
+	case `/suits`:
+		return "КС"
+	case `/sweaters`:
+		return "СВ"
+	case `/kimono`:
+		return "КИ"
+	case `/accessories`:
+		return "А"
+	case `/news`:
+		return "Н"
+	}
+	return "?"
+}
